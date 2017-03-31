@@ -1,0 +1,8 @@
+Z:\Users\Edward\EdwardCode\DaysCountdown\DaysCountdown\bin\Debug\DaysCountdown.exe
+Z:\Users\Edward\EdwardCode\DaysCountdown\DaysCountdown\bin\Debug\DaysCountdown.pdb
+Z:\Users\Edward\EdwardCode\DaysCountdown\DaysCountdown\obj\Debug\DaysCountdown.csprojResolveAssemblyReference.cache
+Z:\Users\Edward\EdwardCode\DaysCountdown\DaysCountdown\obj\Debug\DaysCountdown.frmMain.resources
+Z:\Users\Edward\EdwardCode\DaysCountdown\DaysCountdown\obj\Debug\DaysCountdown.Properties.Resources.resources
+Z:\Users\Edward\EdwardCode\DaysCountdown\DaysCountdown\obj\Debug\DaysCountdown.csproj.GenerateResource.Cache
+Z:\Users\Edward\EdwardCode\DaysCountdown\DaysCountdown\obj\Debug\DaysCountdown.exe
+Z:\Users\Edward\EdwardCode\DaysCountdown\DaysCountdown\obj\Debug\DaysCountdown.pdb
