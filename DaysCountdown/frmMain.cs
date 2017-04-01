@@ -15,6 +15,16 @@ namespace DaysCountdown
         public frmMain()
         {
             InitializeComponent();
+
+            prbDays.Visible = false;
+            prbHours.Visible = false;
+            prbMinutes.Visible = false;
+
+
+       
+
+
+
         }
 
         #region parameters
@@ -30,6 +40,28 @@ namespace DaysCountdown
         static DateTime StartDay;
         int tempSec = 0;
        
+
+            textProgressBar  prbDay = new textProgressBar();
+            //prbDay.Location  = new Point(82, 25);
+            //prbDay.Size  = new Size(632, 45);
+            //this.Controls.Add(prbDay);
+            //prbDay.Visible = true;
+
+            textProgressBar  prbHour = new textProgressBar();
+            //prbHour.Location = new Point(82, 76);
+            //prbHour.Size = new Size(632, 45);
+            //this.Controls.Add(prbHour);
+
+           textProgressBar  prbMinute = new textProgressBar();
+            //prbMinute.Location = new Point(82, 127);
+            //prbMinute.Size = new Size(632, 45);
+            //this.Controls.Add(prbMinute);
+
+            //prbDay.Minimum = 0;
+            //prbHour.Minimum = 0;
+            //prbMinute.Minimum = 0;
+
+
 
         #endregion
 
@@ -174,15 +206,28 @@ namespace DaysCountdown
         {
 
 
-            prbDays.Maximum = Convert.ToInt32(CalcDateDiff(DueDay, StartDay, DateDiffResultType.Days));
-            prbHours.Maximum = 24;
-            prbMinutes.Maximum = 60;
+            //prbDays.Maximum = Convert.ToInt32(CalcDateDiff(DueDay, StartDay, DateDiffResultType.Days));    
+            prbDay.Maximum = Convert.ToInt32(CalcDateDiff(DueDay, StartDay, DateDiffResultType.Days));    
+            //prbHours.Maximum = 24;
+            prbHour.Maximum = 24;
+           // prbMinutes.Maximum = 60;
+            prbMinute.Maximum = 60;
            // prbHours.Maximum = Convert.ToInt32(CalcDateDiff(DueDay, StartDay, DateDiffResultType.Hours));
            // prbMinutes.Maximum = Convert.ToInt32(CalcDateDiff(DueDay, StartDay, DateDiffResultType.Minutes));
 
-            prbDays.Value = Convert.ToInt32(CalcDateDiff(DateTime.Now , StartDay, DateDiffResultType.Days));
-            prbHours.Value = Convert.ToInt32(CalcDateDiff(DateTime.Now, StartDay, DateDiffResultType.Hours));
-            prbMinutes.Value  = Convert.ToInt32(CalcDateDiff(DateTime.Now, StartDay, DateDiffResultType.Minutes));
+
+
+
+
+            prbDay.Value = Convert.ToInt32(CalcDateDiff(DateTime.Now, StartDay, DateDiffResultType.Days));
+            //prbDays.Value = Convert.ToInt32(CalcDateDiff(DateTime.Now, StartDay, DateDiffResultType.Days));
+            prbHour.Value = Convert.ToInt32(CalcDateDiff(DateTime.Now, StartDay, DateDiffResultType.Hours));
+            // prbHours.Value = Convert.ToInt32(CalcDateDiff(DateTime.Now, StartDay, DateDiffResultType.Hours));
+            prbMinute.Value = Convert.ToInt32(CalcDateDiff(DateTime.Now, StartDay, DateDiffResultType.Minutes));
+            //prbMinutes.Value = Convert.ToInt32(CalcDateDiff(DateTime.Now, StartDay, DateDiffResultType.Minutes));
+
+            //
+
 
         }
 
@@ -193,6 +238,33 @@ namespace DaysCountdown
 
         private void frmMain_Load(object sender, EventArgs e)
         {
+
+
+
+            prbDay.Location = new Point(82, 25);
+            prbDay.Size = new Size(632, 45);
+            this.Controls.Add(prbDay);
+            prbDay.Visible = true;
+
+
+            prbHour.Location = new Point(82, 76);
+            prbHour.Size = new Size(632, 45);
+            this.Controls.Add(prbHour);
+
+
+            prbMinute.Location = new Point(82, 127);
+            prbMinute.Size = new Size(632, 45);
+            this.Controls.Add(prbMinute);
+
+            prbDay.Minimum = 0;
+            prbHour.Minimum = 0;
+            prbMinute.Minimum = 0;
+
+
+            prbDay.Visible = true;
+            prbHour.Visible = true;
+            prbMinute.Visible = true;
+
 
             CheckFolderConfig();
             LoadConfig();
@@ -214,13 +286,173 @@ namespace DaysCountdown
             grbStatus.Text = "Countdown Status: " + DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") + ",Due Day:" + _DueDay;
             if (DateTime.Now.Second == 0)
             {
-                prbDays.Value = Convert.ToInt32(CalcDateDiff(DateTime.Now, StartDay, DateDiffResultType.Days));
-                prbHours.Value = Convert.ToInt32(CalcDateDiff(DateTime.Now, StartDay, DateDiffResultType.Hours));
-                prbMinutes.Value = Convert.ToInt32(CalcDateDiff(DateTime.Now, StartDay, DateDiffResultType.Minutes));
+                prbDay.Value = Convert.ToInt32(CalcDateDiff(DateTime.Now, StartDay, DateDiffResultType.Days));
+                //prbDays.Value = Convert.ToInt32(CalcDateDiff(DateTime.Now, StartDay, DateDiffResultType.Days));
+                prbHour.Value = Convert.ToInt32(CalcDateDiff(DateTime.Now, StartDay, DateDiffResultType.Hours));
+               // prbHours.Value = Convert.ToInt32(CalcDateDiff(DateTime.Now, StartDay, DateDiffResultType.Hours));
+                prbMinute.Value = Convert.ToInt32(CalcDateDiff(DateTime.Now, StartDay, DateDiffResultType.Minutes));
+                //prbMinutes.Value = Convert.ToInt32(CalcDateDiff(DateTime.Now, StartDay, DateDiffResultType.Minutes));
             }
 
        
         }
+
+        private void frmMain_DoubleClick(object sender, EventArgs e)
+        {
+            if (this.Width == RUNWIDTH)
+                this.Width = SETTINGWIDTH;
+            else
+                this.Width = RUNWIDTH;
+        }
+
+
+
+        #region 重写grogessbar
+
+        [ToolboxItem(true)]
+
+       public  class textProgressBar : System.Windows.Forms.ProgressBar
+        {
+
+            //[System.Runtime.InteropServices.DllImport("user32.dll ")]
+
+            //static extern IntPtr GetWindowDC(IntPtr hWnd);
+
+            //[System.Runtime.InteropServices.DllImport("user32.dll ")]
+
+            //static extern int ReleaseDC(IntPtr hWnd, IntPtr hDC);
+
+            //private System.Drawing.Color _TextColor = System.Drawing.Color.Black;
+
+            //private System.Drawing.Font _TextFont = new System.Drawing.Font("SimSun ", 12);
+
+            //public System.Drawing.Color TextColor
+            //{
+
+            //    get { return _TextColor; }
+
+            //    set { _TextColor = value; this.Invalidate(); }
+
+            //}
+
+            //public System.Drawing.Font TextFont
+            //{
+
+            //    get { return _TextFont; }
+
+            //    set { _TextFont = value; this.Invalidate(); }
+
+            //}
+
+            //protected override void WndProc(ref   Message m)
+            //{
+
+            //    base.WndProc(ref   m);
+
+            //    if (m.Msg == 0xf || m.Msg == 0x133)
+            //    {
+
+            //        //拦截系统消息，获得当前控件进程以便重绘。  
+
+            //        //一些控件（如TextBox、Button等）是由系统进程绘制，重载OnPaint方法将不起作用.  
+
+            //        //所有这里并没有使用重载OnPaint方法绘制TextBox边框。  
+
+            //        //  
+
+            //        //MSDN:重写   OnPaint   将禁止修改所有控件的外观。  
+
+            //        //那些由   Windows   完成其所有绘图的控件（例如   Textbox）从不调用它们的   OnPaint   方法，  
+
+            //        //因此将永远不会使用自定义代码。请参见您要修改的特定控件的文档，  
+
+            //        //查看   OnPaint   方法是否可用。如果某个控件未将   OnPaint   作为成员方法列出，  
+
+            //        //则您无法通过重写此方法改变其外观。  
+
+            //        //  
+
+            //        //MSDN:要了解可用的   Message.Msg、Message.LParam   和   Message.WParam   值，  
+
+            //        //请参考位于   MSDN   Library   中的   Platform   SDK   文档参考。可在   Platform   SDK（“Core   SDK”一节）  
+
+            //        //下载中包含的   windows.h   头文件中找到实际常数值，该文件也可在   MSDN   上找到。  
+
+            //        IntPtr hDC = GetWindowDC(m.HWnd);
+
+            //        if (hDC.ToInt32() == 0)
+            //        {
+
+            //            return;
+
+            //        }
+
+            //        //base.OnPaint(e);
+
+            //        System.Drawing.Graphics g = Graphics.FromHdc(hDC);
+
+            //        SolidBrush brush = new SolidBrush(_TextColor);
+
+            //        string s = string.Format("{0}%", this.Value * 100 / this.Maximum);
+
+            //        SizeF size = g.MeasureString(s, _TextFont);
+
+            //        float x = (this.Width - size.Width) / 2;
+
+            //        float y = (this.Height - size.Height) / 2;
+
+            //        g.DrawString(s, _TextFont, brush, x, y);
+
+            //        //返回结果  
+
+            //        m.Result = IntPtr.Zero;
+
+            //        //释放  
+
+            //        ReleaseDC(m.HWnd, hDC);
+
+            //    }
+
+            //}
+
+
+        //=========================================
+         public textProgressBar ()
+        {
+            SetStyle(ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint, true);
+        }
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            Rectangle rect = ClientRectangle;
+            Graphics g = e.Graphics;
+
+            ProgressBarRenderer.DrawHorizontalBar(g, rect);
+            rect.Inflate(-3, -3);
+            if (Value > 0)
+            {
+                var clip = new Rectangle(rect.X, rect.Y, (int) ((float) Value/Maximum*rect.Width), rect.Height);
+                ProgressBarRenderer.DrawHorizontalChunks(g, clip);
+            }
+
+            string text = string.Format("{0}%", Value * 100 / Maximum);;
+            using (var font = new Font(FontFamily.GenericSerif, 20))
+            {
+                SizeF sz = g.MeasureString(text, font);
+                var location = new PointF(rect.Width/2 - sz.Width/2, rect.Height/2 - sz.Height/2 + 2);
+                g.DrawString(text, font, Brushes.Red, location);
+            }
+        }
+
+
+
+
+
+        }
+
+        #endregion
+
+ 
 
 
 

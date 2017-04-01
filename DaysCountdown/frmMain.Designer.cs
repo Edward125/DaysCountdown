@@ -49,7 +49,7 @@
             // 
             // prbDays
             // 
-            this.prbDays.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.prbDays.BackColor = System.Drawing.Color.Black;
             this.prbDays.Location = new System.Drawing.Point(82, 25);
             this.prbDays.Name = "prbDays";
             this.prbDays.Size = new System.Drawing.Size(632, 45);
@@ -197,6 +197,7 @@
             this.Name = "frmMain";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.frmMain_Load);
+            this.DoubleClick += new System.EventHandler(this.frmMain_DoubleClick);
             this.grbStatus.ResumeLayout(false);
             this.grbStatus.PerformLayout();
             this.grbSetting.ResumeLayout(false);
