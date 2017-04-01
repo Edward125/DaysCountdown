@@ -29,19 +29,19 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.prbDays = new System.Windows.Forms.ProgressBar();
+            this.prbDays = new DaysCountdown.frmMain.textProgressBar();
             this.grbStatus = new System.Windows.Forms.GroupBox();
             this.lblMinutes = new System.Windows.Forms.Label();
-            this.prbMinutes = new System.Windows.Forms.ProgressBar();
+            this.prbMinutes = new DaysCountdown.frmMain.textProgressBar();
             this.lblHours = new System.Windows.Forms.Label();
-            this.prbHours = new System.Windows.Forms.ProgressBar();
+            this.prbHours = new DaysCountdown.frmMain.textProgressBar();
             this.lblDays = new System.Windows.Forms.Label();
             this.grbSetting = new System.Windows.Forms.GroupBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.dtpStart = new System.Windows.Forms.DateTimePicker();
             this.btnSetting = new System.Windows.Forms.Button();
             this.dtpDueDay = new System.Windows.Forms.DateTimePicker();
-            this.dtpStart = new System.Windows.Forms.DateTimePicker();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.timerNow = new System.Windows.Forms.Timer(this.components);
             this.grbStatus.SuspendLayout();
             this.grbSetting.SuspendLayout();
@@ -49,11 +49,14 @@
             // 
             // prbDays
             // 
-            this.prbDays.BackColor = System.Drawing.Color.Black;
+            this.prbDays.BackColor = System.Drawing.Color.Silver;
+            this.prbDays.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.prbDays.Location = new System.Drawing.Point(82, 25);
             this.prbDays.Name = "prbDays";
             this.prbDays.Size = new System.Drawing.Size(632, 45);
             this.prbDays.TabIndex = 0;
+            this.prbDays.TextColor = System.Drawing.Color.Black;
+            this.prbDays.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             // 
             // grbStatus
             // 
@@ -84,10 +87,14 @@
             // 
             // prbMinutes
             // 
+            this.prbMinutes.BackColor = System.Drawing.Color.Silver;
+            this.prbMinutes.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.prbMinutes.Location = new System.Drawing.Point(82, 127);
             this.prbMinutes.Name = "prbMinutes";
             this.prbMinutes.Size = new System.Drawing.Size(632, 45);
             this.prbMinutes.TabIndex = 2;
+            this.prbMinutes.TextColor = System.Drawing.Color.Black;
+            this.prbMinutes.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             // 
             // lblHours
             // 
@@ -101,10 +108,14 @@
             // 
             // prbHours
             // 
+            this.prbHours.BackColor = System.Drawing.Color.Silver;
+            this.prbHours.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.prbHours.Location = new System.Drawing.Point(82, 76);
             this.prbHours.Name = "prbHours";
             this.prbHours.Size = new System.Drawing.Size(632, 45);
             this.prbHours.TabIndex = 1;
+            this.prbHours.TextColor = System.Drawing.Color.Black;
+            this.prbHours.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             // 
             // lblDays
             // 
@@ -131,6 +142,33 @@
             this.grbSetting.TabStop = false;
             this.grbSetting.Text = "Setting";
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(18, 91);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(60, 19);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "DueDay";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(18, 44);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(39, 19);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "Start";
+            // 
+            // dtpStart
+            // 
+            this.dtpStart.Location = new System.Drawing.Point(84, 38);
+            this.dtpStart.Name = "dtpStart";
+            this.dtpStart.Size = new System.Drawing.Size(125, 26);
+            this.dtpStart.TabIndex = 4;
+            // 
             // btnSetting
             // 
             this.btnSetting.Font = new System.Drawing.Font("Calibri", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -149,33 +187,6 @@
             this.dtpDueDay.Name = "dtpDueDay";
             this.dtpDueDay.Size = new System.Drawing.Size(125, 26);
             this.dtpDueDay.TabIndex = 0;
-            // 
-            // dtpStart
-            // 
-            this.dtpStart.Location = new System.Drawing.Point(84, 38);
-            this.dtpStart.Name = "dtpStart";
-            this.dtpStart.Size = new System.Drawing.Size(125, 26);
-            this.dtpStart.TabIndex = 4;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(18, 44);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(39, 19);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "Start";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(18, 91);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(60, 19);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "DueDay";
             // 
             // timerNow
             // 
@@ -208,12 +219,15 @@
 
         #endregion
 
-        private System.Windows.Forms.ProgressBar prbDays;
+        //private System.Windows.Forms.ProgressBar prbDays;
+        private textProgressBar prbDays;
         private System.Windows.Forms.GroupBox grbStatus;
         private System.Windows.Forms.Label lblMinutes;
-        private System.Windows.Forms.ProgressBar prbMinutes;
+        //private System.Windows.Forms.ProgressBar prbMinutes;
+        private textProgressBar prbMinutes;
         private System.Windows.Forms.Label lblHours;
-        private System.Windows.Forms.ProgressBar prbHours;
+        //private System.Windows.Forms.ProgressBar prbHours;
+        private textProgressBar prbHours;
         private System.Windows.Forms.Label lblDays;
         private System.Windows.Forms.GroupBox grbSetting;
         private System.Windows.Forms.DateTimePicker dtpDueDay;
