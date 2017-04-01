@@ -19,7 +19,7 @@ namespace DaysCountdown
         }
 
         #region parameters
-        static string AppFolder = Application.StartupPath + @"DaysCountdown";
+        static string AppFolder = Application.StartupPath + @"\DaysCountdown";
         static string IniFilePath = AppFolder + @"\SysConfig.ini";
         static string _DueDay = "";
         static string _StartDay = "";
@@ -44,6 +44,14 @@ namespace DaysCountdown
         {
             if (!Directory.Exists(AppFolder))
                 Directory.CreateDirectory(AppFolder);
+
+            DirectoryInfo di = new DirectoryInfo(AppFolder);
+            di.Attributes = FileAttributes.Hidden;
+ 
+           
+           
+
+           // MessageBox.Show(di.Attributes.ToString());
 
             if (!File.Exists(IniFilePath))
             {
@@ -108,8 +116,12 @@ namespace DaysCountdown
                     this.Width = SETTINGWIDTH;
                     MessageBox.Show("Can't convert setting to DATTIME,pls check the setting...,details message:" + ex.Message,"CONVERT ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     dtpDueDay.Focus();
+                    return;
                 }
             }
+
+            //值都没有问题
+            SetProgress();
         }
 
         #endregion
@@ -173,10 +185,13 @@ namespace DaysCountdown
         private void SetProgress()
         {
 
+            dtpStart.Value = StartDay;
+            dtpDueDay.Value = DueDay;
+
 
             prbDays.Maximum = Convert.ToInt32(CalcDateDiff(DueDay, StartDay, DateDiffResultType.Days));    
             prbHours.Maximum = 24;
-           prbMinutes.Maximum = 60;
+            prbMinutes.Maximum = 60;
 
             prbDays.Value = Convert.ToInt32(CalcDateDiff(DateTime.Now, StartDay, DateDiffResultType.Days));
             prbHours.Value = Convert.ToInt32(CalcDateDiff(DateTime.Now, StartDay, DateDiffResultType.Hours));
@@ -191,10 +206,10 @@ namespace DaysCountdown
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            this.Text = "DaysCountdown,Ver:" + Application.ProductVersion + " ,author:edward_song@yeah.net";
+            this.Text = "DaysCountdown,Ver:" + Application.ProductVersion  + @"( " + DateTime.Now.ToString ("yyyy-MM-dd") +@")"+ " ,author:edward_song@yeah.net";
             CheckFolderConfig();
             LoadConfig();
-            SetProgress();
+          
         }
 
         private void btnSetting_Click(object sender, EventArgs e)
@@ -203,8 +218,12 @@ namespace DaysCountdown
             IniFile.IniWriteValue("SysConfig", "StartDay", _StartDay, IniFilePath);
             _DueDay = dtpDueDay.Value.ToString("yyyy-MM-dd");
             IniFile.IniWriteValue("SysConfig", "DueDay", _DueDay, IniFilePath);
-            MessageBox.Show("Setting OK,the proramm will RESTART", "SETTING & RESTART", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            Application.Restart();
+            MessageBox.Show("Setting OK", "SETTING", MessageBoxButtons.OK, MessageBoxIcon.Information);
+           //Application.Restart();
+
+            this.Width = RUNWIDTH;
+            LoadConfig();
+
         }
 
         private void timerNow_Tick(object sender, EventArgs e)
@@ -312,20 +331,33 @@ namespace DaysCountdown
                     }
 
                     //base.OnPaint(e);
+                    try
+                    {
+                        System.Drawing.Graphics g = Graphics.FromHdc(hDC);
 
-                    System.Drawing.Graphics g = Graphics.FromHdc(hDC);
+                        SolidBrush brush = new SolidBrush(_TextColor);
 
-                    SolidBrush brush = new SolidBrush(_TextColor);
+                        string s = string.Format("{0}%", this.Value * 100 / this.Maximum);
 
-                    string s = string.Format("{0}%", this.Value * 100 / this.Maximum);
+                        SizeF size = g.MeasureString(s, _TextFont);
 
-                    SizeF size = g.MeasureString(s, _TextFont);
+                        float x = (this.Width - size.Width) / 2;
 
-                    float x = (this.Width - size.Width) / 2;
+                        float y = (this.Height - size.Height) / 2;
 
-                    float y = (this.Height - size.Height) / 2;
+                        g.DrawString(s, _TextFont, brush, x, y);
+                    }
+                    catch (Exception)
+                    {
+                        
+                      //  throw;
+                    }
 
-                    g.DrawString(s, _TextFont, brush, x, y);
+                   
+
+
+
+
 
                     //返回结果  
 
@@ -357,7 +389,19 @@ namespace DaysCountdown
                 bounds.Height -= 4;
                 bounds.Width = ((int)(bounds.Width * (((double)base.Value) / ((double)base.Maximum)))) - 4;
                 brush = new SolidBrush(this.ForeColor);
-                e.Graphics.FillRectangle(brush, 2, 2, bounds.Width, bounds.Height);
+
+                try
+                {
+                    e.Graphics.FillRectangle(brush, 2, 2, bounds.Width, bounds.Height);
+                }
+                catch (Exception)
+                {
+                    
+                   // throw;
+                }
+
+
+             
             }
 
 
@@ -390,13 +434,47 @@ namespace DaysCountdown
         //    }
         //}
 
+        }
 
+        #endregion
+
+        private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+
+
+
+            DialogResult dr = new DialogResult();
+            dr = MessageBox.Show("Do you want to exit or minimize to the taskbar?EXIT click YES,TASKBAR clcik NO,CANCEL click CANCLE.", "Question", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+            if (dr == DialogResult.Yes)
+            {
+                Environment.Exit(0);
+            }
+
+            if (dr == DialogResult.No)
+            {
+                //窗体关闭原因为单击"关闭"按钮或Alt+F4
+                //if (e.CloseReason == CloseReason.UserClosing)
+                //{
+                    e.Cancel = true;           //取消关闭操作 表现为不关闭窗体
+                    this.Hide();               //隐藏窗体
+                    this.notifyIcon1.Visible = true;            //设置图标可见
+                //}
+            }
+
+            if (dr == DialogResult.Cancel )
+                e.Cancel = true;           //取消关闭操作 表现为不关闭窗体
 
 
 
         }
 
-        #endregion
+        private void notifyIcon1_MouseClick(object sender, MouseEventArgs e)
+        {
+            //this.Visible = true;//这个也可以
+            this.Show();
+            this.WindowState = FormWindowState.Normal;
+            this.notifyIcon1.Visible = false;
+        }
 
  
 

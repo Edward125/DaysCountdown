@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.prbDays = new DaysCountdown.frmMain.textProgressBar();
             this.grbStatus = new System.Windows.Forms.GroupBox();
             this.lblMinutes = new System.Windows.Forms.Label();
@@ -43,6 +44,7 @@
             this.btnSetting = new System.Windows.Forms.Button();
             this.dtpDueDay = new System.Windows.Forms.DateTimePicker();
             this.timerNow = new System.Windows.Forms.Timer(this.components);
+            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.grbStatus.SuspendLayout();
             this.grbSetting.SuspendLayout();
             this.SuspendLayout();
@@ -194,6 +196,13 @@
             this.timerNow.Interval = 1000;
             this.timerNow.Tick += new System.EventHandler(this.timerNow_Tick);
             // 
+            // notifyIcon1
+            // 
+            this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
+            this.notifyIcon1.Text = "notifyIcon1";
+            this.notifyIcon1.Visible = true;
+            this.notifyIcon1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseClick);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -203,10 +212,13 @@
             this.Controls.Add(this.grbSetting);
             this.Controls.Add(this.grbStatus);
             this.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.MaximizeBox = false;
             this.Name = "frmMain";
             this.Text = "Form1";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.DoubleClick += new System.EventHandler(this.frmMain_DoubleClick);
             this.grbStatus.ResumeLayout(false);
@@ -236,6 +248,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DateTimePicker dtpStart;
         private System.Windows.Forms.Timer timerNow;
+        private System.Windows.Forms.NotifyIcon notifyIcon1;
     }
 }
 
