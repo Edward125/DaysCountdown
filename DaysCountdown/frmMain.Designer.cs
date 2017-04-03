@@ -57,8 +57,8 @@
             this.prbDays.Name = "prbDays";
             this.prbDays.Size = new System.Drawing.Size(632, 45);
             this.prbDays.TabIndex = 0;
-            this.prbDays.TextColor = System.Drawing.Color.Black;
-            this.prbDays.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+           // this.prbDays.TextColor = System.Drawing.Color.Black;
+            //this.prbDays.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             // 
             // grbStatus
             // 
@@ -95,8 +95,8 @@
             this.prbMinutes.Name = "prbMinutes";
             this.prbMinutes.Size = new System.Drawing.Size(632, 45);
             this.prbMinutes.TabIndex = 2;
-            this.prbMinutes.TextColor = System.Drawing.Color.Black;
-            this.prbMinutes.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            //this.prbMinutes.TextColor = System.Drawing.Color.Black;
+            //this.prbMinutes.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             // 
             // lblHours
             // 
@@ -116,8 +116,8 @@
             this.prbHours.Name = "prbHours";
             this.prbHours.Size = new System.Drawing.Size(632, 45);
             this.prbHours.TabIndex = 1;
-            this.prbHours.TextColor = System.Drawing.Color.Black;
-            this.prbHours.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            //this.prbHours.TextColor = System.Drawing.Color.Black;
+            //this.prbHours.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             // 
             // lblDays
             // 
