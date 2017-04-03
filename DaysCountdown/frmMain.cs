@@ -207,6 +207,8 @@ namespace DaysCountdown
         private void frmMain_Load(object sender, EventArgs e)
         {
             this.Text = "DaysCountdown,Ver:" + Application.ProductVersion  + @"( " + DateTime.Now.ToString ("yyyy-MM-dd") +@")"+ " ,author:edward_song@yeah.net";
+            //
+            notifyIcon1.Text = "DaysCountdown,Ver:" + Application.ProductVersion;
             CheckFolderConfig();
             LoadConfig();
           
